@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 public class Principal {
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         // Creamos una instancia de Parqueo con 20 espacios
         Parqueo parqueo = new Parqueo(20);
 
@@ -25,5 +26,10 @@ public class Principal {
         // Terminamos el ExecutorService
         ejecutor.shutdown();
         while (!ejecutor.isTerminated()) ;
+=======
+        System.out.println("Prueba uno"); 
+        System.out.println("Prueba dos");
+        System.out.println("Prueba tres");
+>>>>>>> 3e5265eca2e70ec514ce4e34a76ddc0e38e67a70
     }
 }
