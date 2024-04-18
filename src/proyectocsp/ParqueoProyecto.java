@@ -15,11 +15,11 @@ public class ParqueoProyecto {
     public static void main(String[] args) {
         
         
-        
+        int tamaño=100;
         Parqueo modC = new Parqueo(100);
         ingreso frm = new ingreso();
         
-        ControlInterfazes ctrl= new ControlInterfazes(modC,frm);
+        ControlInterfazes ctrl= new ControlInterfazes(modC,frm,tamaño);
         ctrl.iniciar();
         frm.setVisible(true);
         

@@ -17,9 +17,9 @@ import javax.swing.*;
 public class ControlInterfazes implements ActionListener{
     private final Parqueo consultas;
     private final ingreso vista;
-
-    public ControlInterfazes(Parqueo consultas, ingreso vista) {
-        
+    private int tamaño;
+    public ControlInterfazes(Parqueo consultas, ingreso vista,int tamaño ) {
+        this.tamaño = tamaño;
         this.consultas = consultas;
         this.vista = vista;
         this.vista.btnSalirParqueo.addActionListener(this);
@@ -27,14 +27,20 @@ public class ControlInterfazes implements ActionListener{
         this.vista.btnLimpiar.addActionListener(this);
         this.vista.btnBuscar.addActionListener(this);
         this.vista.btnVer.addActionListener(this);
+        this.vista.btnActualizar.addActionListener(this);
     }
 
-    public void iniciar() {
+    public void iniciar( ) {
         vista.setTitle("Ingress");
         vista.setLocationRelativeTo(null);
         
+     
     }
-
+    
+    public int getTamaño() {
+        return tamaño;
+    }
+    
     public void limpiar() {
         vista.txtLugar.setText(null);
         vista.txtMatricula.setText(null);
@@ -81,11 +87,26 @@ public class ControlInterfazes implements ActionListener{
             limpiar();
             
         }    
+        if (e.getSource() == vista.btnActualizar) {
+        DisponibilidadParqueo disponibilidadParqueo = new DisponibilidadParqueo(consultas, 5000);
+
+        disponibilidadParqueo.start();
+        
+            int ocupados = disponibilidadParqueo.contarEspaciosOcupados();
+            int sise =getTamaño();
+            int disponibles = sise-ocupados;
+            
+           vista.txtOcupados.setText(String.valueOf(disponibles));
+           vista.txtEstado.setText(disponibilidadParqueo.mensajeMostrar(disponibles));
+            
+        }  
         //boton limpiar
         if (e.getSource() == vista.btnLimpiar) {
             limpiar();
         }
     }
+
+    
 
 }
     
