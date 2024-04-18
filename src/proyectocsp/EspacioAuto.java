@@ -12,8 +12,8 @@ public class EspacioAuto extends Espacio {
     
     
    @Override
-   public void imprimirTipo() {
-       System.out.println("Este es un espacio para autos.");
+   public String imprimirTipo() {
+       return" Este es un espacio para autos.";
    }
    public String obtenerDatos() {
         return "Tipo: Espacio Auto\nPlaca: " + getNumeroPlaca();

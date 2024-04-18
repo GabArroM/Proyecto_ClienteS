@@ -10,8 +10,8 @@ package proyectocsp;
  */
 public class EspacioMotos extends Espacio {
     @Override 
-    public void imprimirTipo() {
-        System.out.println("Este es un espacio para motos.");
+    public String imprimirTipo() {
+        return "Este es un espacio para motos.";
     }
     @Override
     public String obtenerDatos() {

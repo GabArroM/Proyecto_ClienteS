@@ -1,6 +1,8 @@
 
 package proyectocsp;
 
+import javax.swing.JOptionPane;
+
 public class Parqueo {
 
     private Espacio[] espacios;
@@ -20,71 +22,72 @@ public class Parqueo {
         return espacios;
     }
 
-    public void imprimirEstadoParqueo() {
-        for (int i = 0; i < espacios.length; i++) {
-            System.out.println("=======================================");
-            System.out.println("Espacio " + i + ": ");
-            if (espacios[i] != null) {
-                espacios[i].imprimirTipo();
-                if (espacios[i].estaOcupado()) {
-                    System.out.println("Ocupado");
-                } else {
-                    System.out.println("Libre");
-                }
+    public String obtenerEstadoParqueo() {
+    String estadoParqueo = "";
+
+    for (int i = 0; i < espacios.length; i++) {
+        estadoParqueo += "=======================================\n";
+        estadoParqueo += "Espacio " + i + ": \n";
+        if (espacios[i] != null) {
+            if (espacios[i].estaOcupado()) {
+                estadoParqueo += "Ocupado\n";
             } else {
-                System.out.println("Espacio vacío");
+                estadoParqueo += "Libre\n";
             }
+        } else {
+            estadoParqueo += "Espacio vacío\n";
         }
     }
 
-    public void agregarEspacio(int posicion, Espacio espacio) {
+    return estadoParqueo;
+}
+    
+    public void agregarDatos(int posicion, String placa, boolean esAuto) {
         if (posicion >= 0 && posicion < espacios.length) {
-            espacios[posicion] = espacio;
+            if (esAuto && espacios[posicion] instanceof EspacioAuto) {
+                EspacioAuto espacioAuto = (EspacioAuto) espacios[posicion];
+                espacioAuto.setNumeroPlaca(placa);
+                espacioAuto.ocupar();
+            } else if (!esAuto && espacios[posicion] instanceof EspacioMotos) {
+                EspacioMotos espacioMotos = (EspacioMotos) espacios[posicion];
+                espacioMotos.setNumeroPlaca(placa);
+                espacioMotos.ocupar();
+            } else {
+                JOptionPane.showMessageDialog(null,"La posición no corresponde al tipo de vehículo especificado.");
+            }
         } else {
-            System.out.println("La posición está fuera de rango.");
+            JOptionPane.showMessageDialog(null,"La posición está fuera de rango.");
         }
     }
 
-    public void eliminarEspacio(int posicion) {
+    public void eliminarDatos(int posicion) {
+        
         if (posicion >= 0 && posicion < espacios.length) {
-            espacios[posicion] = null;
+            espacios[posicion].desocupar();
+            espacios[posicion].setNumeroPlaca(null);
+            JOptionPane.showMessageDialog(null,"Haz logrado salir con exito");
         } else {
-            System.out.println("La posición está fuera de rango.");
+            JOptionPane.showMessageDialog(null,"La posición está fuera de rango.");
         }
     }
-
-    public Espacio buscarEspacio(int posicion) {
+    
+        public String obtenerDatosEspacio(int posicion) {
         if (posicion >= 0 && posicion < espacios.length) {
-            return espacios[posicion];
+            if (espacios[posicion] != null) {
+                Espacio espacio = espacios[posicion];
+                String estado = "=======================================\n";
+                estado += "Espacio " + posicion + ": \n";
+                estado += espacio.imprimirTipo() + "\n";
+                estado += espacio.estaOcupado() ? "Ocupado\n" : "Libre\n";
+                estado += espacio.obtenerDatos() + "\n"; // Si hay datos específicos del espacio
+                return estado;
+            } else {
+                return "Espacio vacío\n";
+            }
         } else {
-            System.out.println("La posición está fuera de rango.");
-            return null;
-        }
-    }
-
-    public void setDatosEspacioAuto(int posicion, String placa) {
-        establecerDatosEspacio(posicion, placa, EspacioAuto.class);
-    }
-
-    public void setDatosEspacioMotos(int posicion, String placa) {
-        establecerDatosEspacio(posicion, placa, EspacioMotos.class);
-    }
-
-    private void establecerDatosEspacio(int posicion, String placa, Class<? extends Espacio> tipoEspacio) {
-        if (posicion >= 0 && posicion < espacios.length && tipoEspacio.isInstance(espacios[posicion])) {
-            Espacio espacio = espacios[posicion];
-            espacio.setNumeroPlaca(placa);
-            espacio.ocupar();
-        } else {
-            System.out.println("La posición no es válida o no corresponde al tipo de espacio especificado.");
-        }
-    }
-
-    public String obtenerDatosEspacio(int posicion) {
-        if (posicion >= 0 && posicion < espacios.length && espacios[posicion] != null) {
-            return espacios[posicion].obtenerDatos();
-        } else {
-            return "La posición no es válida o está vacía.";
+            return "La posición está fuera de rango.";
         }
     }
 }
+
+

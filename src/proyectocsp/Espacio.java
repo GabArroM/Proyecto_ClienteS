@@ -37,7 +37,7 @@ protected String id;
        this.ocupado = false;
    }
    
-   public abstract void imprimirTipo();
+   public abstract String imprimirTipo();
    
    public abstract String obtenerDatos();
    
