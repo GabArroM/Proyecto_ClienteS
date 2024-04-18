@@ -63,9 +63,9 @@ public class DisponibilidadParqueo extends Thread {
         String s = "";
         if (cantidad == disponibles) {
                 s="¡Todos los espacios del parqueo están llenos!";
-            } else if (cantidad <= disponibles / 2) {
+            } else if (cantidad >= disponibles / 2) {
                 s="¡La mitad de los espacios del parqueo están llenos!";
-            } else if (cantidad <= 1) {
+            } else if (cantidad >= 1) {
                 s="¡Algunos espacios del parqueo estan seindo Usados!";
                 
             } else if (cantidad == 0) {
