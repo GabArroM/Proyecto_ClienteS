@@ -44,7 +44,7 @@ public class ingreso extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnActualizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Matricula del Auto /Motocicleta");
