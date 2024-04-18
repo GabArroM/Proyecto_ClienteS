@@ -4,7 +4,9 @@
  */
 package proyectocsp;
 
-import Ingresar.ingreso;
+import MenuInicio.Menu;
+
+
 
 /**
  *
@@ -14,14 +16,8 @@ public class ParqueoProyecto {
 
     public static void main(String[] args) {
         
+        Menu m = new Menu();
         
-        int tamaño=100;
-        Parqueo modC = new Parqueo(100);
-        ingreso frm = new ingreso();
-        
-        ControlInterfazes ctrl= new ControlInterfazes(modC,frm,tamaño);
-        ctrl.iniciar();
-        frm.setVisible(true);
         
 //       Parqueo parqueo = new Parqueo(10);
 //       

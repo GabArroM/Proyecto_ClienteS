@@ -57,8 +57,10 @@ public class ControlInterfazes implements ActionListener{
             if ("Auto".equals(eleccion)){
             consultas.agregarDatos(Integer.parseInt(vista.txtLugar.getText()), vista.txtMatricula.getText(), true);
             }else if ("Moto".equals(eleccion)) {
-            consultas.agregarDatos(Integer.parseInt(vista.txtLugar.getText()), vista.txtMatricula.getText(), false);   
+            consultas.agregarDatos(Integer.parseInt(vista.txtLugar.getText()), vista.txtMatricula.getText(), false);
+            limpiar();
             }
+            
             else{
                 JOptionPane.showMessageDialog(null, "No se ha encontrado");
             }
